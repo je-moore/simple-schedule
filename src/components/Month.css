@@ -2,17 +2,30 @@
   text-align: center;
 }
 
+.calendar-month {
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.calendar-month-heading {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);  
+  text-align: center;
+}
+
 .calendar-month-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: 100px;
-  grid-gap: 1vw;
-  width: 90vw;
-  padding: 5vw;
-  background-color: #ccc;
-  margin: 0 auto;
+  grid-gap: 0.4vw;
+  padding: 0.4vw;
+  background-color: #eee;
 }
 
 .calendar-day {
   background-color: #fff;
+}
+
+.today {
+  background-color: #fffff4;
 }

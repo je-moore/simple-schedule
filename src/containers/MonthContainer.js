@@ -13,7 +13,7 @@ const MonthContainer = () => {
     const firstDateOfMonth = addMonths(startOfMonth(today), monthOffset)
     const startingDay = getDay(firstDateOfMonth)
     const daysInMonth = getDaysInMonth(firstDateOfMonth)
-    const currentDay = monthOffset === 0 ? getDate(today) : -1
+    const currentDay = monthOffset === 0 ? getDate(today) : null
     const monthName = format(firstDateOfMonth, 'MMMM')
     return {
       currentDay,
@@ -23,7 +23,7 @@ const MonthContainer = () => {
     }
   }
 
-  const init = initMonth(1)
+  const init = initMonth()
   console.log(init)
   return <Month {...init} />
 }
