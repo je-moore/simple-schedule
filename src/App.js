@@ -1,5 +1,5 @@
-import React from 'react';
-import Month from './components/Month'
+import React from 'react'
+import MonthContainer from './containers/MonthContainer'
 
 function App() {
   return (
@@ -7,9 +7,9 @@ function App() {
       <header className="App-header">
         <h1>Simple Schedule</h1>
       </header>
-      <Month />
+      <MonthContainer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

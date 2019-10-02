@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-
-const UserTable = props => {
-
-  return (<div className="calendar-day">
-    
-  </div>)
-
+const Day = props => {
+  const { date, startingDay } = props
+  const firstDay = date === '1' ? { gridColumnStart: startingDay + 1 } : null
+  return (
+    <div className="calendar-day" style={firstDay}>
+      {date}
+    </div>
+  )
 }
+
+export default Day
