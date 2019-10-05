@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Month from '../components/Month'
+import MonthHeader from '../components/MonthHeader'
 import getDate from 'date-fns/getDate'
 import startOfMonth from 'date-fns/startOfMonth'
 import getDaysInMonth from 'date-fns/getDaysInMonth'
@@ -13,9 +14,10 @@ const MonthContainer = () => {
     const firstDateOfMonth = addMonths(startOfMonth(today), monthOffset)
     const startingDay = getDay(firstDateOfMonth)
     const daysInMonth = getDaysInMonth(firstDateOfMonth)
-    const currentDay = monthOffset === 0 ? getDate(today) : null
+    const currentDay = monthOffset === 0 ? getDate(today) : ''
     const monthName = format(firstDateOfMonth, 'MMMM')
     return {
+      monthOffset,
       currentDay,
       startingDay,
       daysInMonth,
@@ -23,9 +25,22 @@ const MonthContainer = () => {
     }
   }
 
-  const init = initMonth()
-  console.log(init)
-  return <Month {...init} />
+  const initialMonth = initMonth()
+  const [month, setMonth] = useState(initialMonth)
+  useEffect(() => {
+    setMonth(month)
+  }, [month])
+
+  const shiftMonth = increment => {
+    setMonth(initMonth(month.monthOffset + increment))
+  }
+
+  return (
+    <div className="calendar-month">
+      <MonthHeader monthName={month.monthName} shiftMonth={shiftMonth} />
+      <Month {...month} />
+    </div>
+  )
 }
 
 export default MonthContainer

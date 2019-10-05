@@ -1,5 +1,6 @@
 import React from 'react'
 import MonthContainer from './containers/MonthContainer'
+import './App.css'
 
 function App() {
   return (

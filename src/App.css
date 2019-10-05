@@ -1,0 +1,72 @@
+/* MonthHeader */
+
+div.month-header {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  margin: 1.5rem 0;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1rem;
+}
+
+h2.month-name {
+  order: 2;
+  flex-grow: 0;
+  line-height: 1rem;
+}
+
+span.shift-month {
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+span.shift-month:hover,
+span.shift-month:active {
+  color: #ccc;
+}
+
+span.prev-month {
+  order: 1;
+  text-align: right;
+}
+
+span.next-month {
+  order: 3;
+}
+
+/* Month */
+
+.month-name {
+  text-align: center;
+}
+
+.calendar-month {
+  width: 90vw;
+  margin: 0 auto 10vh;
+}
+
+.calendar-month-heading {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+.calendar-month-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 100px;
+  grid-gap: 0.4vw;
+  padding: 0.4vw;
+  background-color: #eee;
+}
+
+/* Day */
+
+.calendar-day {
+  background-color: #fff;
+}
+
+.today {
+  background-color: #fffff4;
+}
