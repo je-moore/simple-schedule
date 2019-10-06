@@ -65,8 +65,21 @@ span.next-month {
 
 .calendar-day {
   background-color: #fff;
+  padding: 0rem 0.3rem;
 }
 
 .today {
   background-color: #fffff4;
+}
+
+.calendar-day-date {
+  font-size: 80%;
+  font-weight: bold;
+  line-height: 1rem;
+}
+
+.calendar-day-plan {
+  font-size: 80%;
+  font-weight: bold;
+  line-height: 1rem;
 }

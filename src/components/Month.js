@@ -1,9 +1,7 @@
 import React from 'react'
 import Day from '../components/Day'
 
-const Month = props => {
-  const { currentDay, startingDay, daysInMonth, monthName } = props
-
+const Month = ({ currentDay, startingDay, daysInMonth, monthName, plans }) => {
   return (
     <div>
       <div className="calendar-month-heading">
@@ -18,10 +16,11 @@ const Month = props => {
       <div className="calendar-month-days">
         {Array.from(Array(daysInMonth), (value, index) => (
           <Day
-            key={monthName + index}
+            key={monthName + (index + 1)}
             date={(index + 1).toString()}
             startingDay={startingDay}
             currentDay={currentDay}
+            plan={plans[index + 1]}
           />
         ))}
       </div>

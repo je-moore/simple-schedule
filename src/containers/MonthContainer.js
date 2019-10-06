@@ -16,29 +16,53 @@ const MonthContainer = () => {
     const daysInMonth = getDaysInMonth(firstDateOfMonth)
     const currentDay = monthOffset === 0 ? getDate(today) : ''
     const monthName = format(firstDateOfMonth, 'MMMM')
+    const monthNumber = format(firstDateOfMonth, 'yyMM')
     return {
       monthOffset,
       currentDay,
       startingDay,
       daysInMonth,
       monthName,
+      monthNumber,
     }
   }
 
+  // structure of month
   const initialMonth = initMonth()
   const [month, setMonth] = useState(initialMonth)
-  useEffect(() => {
-    setMonth(month)
-  }, [month])
-
   const shiftMonth = increment => {
     setMonth(initMonth(month.monthOffset + increment))
   }
 
+  // plans for each day of the month
+  const baseUrl = 'http://localhost:3001'
+  const [hasError, setErrors] = useState(false)
+  const [plans, setPlans] = useState({})
+  async function fetchPlans(monthNumber) {
+    const res = await fetch(`${baseUrl}/plans/${monthNumber}`)
+    res
+      .json()
+      .then(res => {
+        // convert array of date plans to object of plans keyed by date
+        const plans = res.result.reduce((obj, plan) => {
+          obj[plan.day] = plan
+          return obj
+        }, {})
+        setPlans(plans)
+      })
+      .catch(err => setErrors(err))
+  }
+
+  // render calendar when month changes
+  useEffect(() => {
+    setMonth(month)
+    fetchPlans(month.monthNumber)
+  }, [month])
+
   return (
     <div className="calendar-month">
       <MonthHeader monthName={month.monthName} shiftMonth={shiftMonth} />
-      <Month {...month} />
+      <Month {...month} plans={plans} />
     </div>
   )
 }
