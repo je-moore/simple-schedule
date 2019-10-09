@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import EditDay from './EditDay'
 import wretch from 'wretch'
 
