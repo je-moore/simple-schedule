@@ -41,7 +41,6 @@ const MonthContainer = () => {
   // plans for each day of the month
   const baseUrl = 'http://localhost:3001'
   const [hasError, setErrors] = useState(false)
-  // const initialPlans = fetchPlans(fetchPlans(initialMonth.monthId))
   const [plans, setPlans] = useState({})
   const fetchPlans = async monthId => {
     const res = await fetch(`${baseUrl}/plans/${monthId}`)
@@ -63,7 +62,7 @@ const MonthContainer = () => {
     const newRefDate = referenceDate(monthIndex)
     setMonth(initMonth(newRefDate))
     fetchPlans(format(newRefDate, 'yyMM'))
-  }, [monthIndex])
+  }, [monthIndex, plans])
 
   // which date is currently being edited
   const [editing, setEditing] = useState(-1)
@@ -76,6 +75,7 @@ const MonthContainer = () => {
         plans={plans}
         editing={editing}
         setEditing={setEditing}
+        setPlans={setPlans}
       />
     </div>
   )

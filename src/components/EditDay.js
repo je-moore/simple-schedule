@@ -30,9 +30,8 @@ const EditDay = ({ id, plan, updatePlan }) => {
         cols="50"
         onChange={handleInputChange}
         ref={txt}
-      >
-        {plan}
-      </textarea>
+        defaultValue={plan}
+      ></textarea>
       <button>Exit</button>
     </form>
   )

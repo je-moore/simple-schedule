@@ -6,9 +6,11 @@ const Month = ({
   startingDay,
   daysInMonth,
   monthName,
+  monthId,
   plans,
   editing,
   setEditing,
+  setPlans,
 }) => {
   return (
     <div>
@@ -25,13 +27,15 @@ const Month = ({
         {Array.from(Array(daysInMonth), (value, index) => (
           <Day
             key={monthName + (index + 1)}
-            id={monthName + (index + 1)}
+            id={monthId + ('0' + (index + 1)).slice(-2)}
             date={(index + 1).toString()}
             startingDay={startingDay}
             currentDay={currentDay}
             currentPlan={plans[index + 1]}
             editing={editing}
             setEditing={setEditing}
+            setPlans={setPlans}
+            plans={plans}
           />
         ))}
       </div>

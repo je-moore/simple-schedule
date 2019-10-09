@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import EditDay from './EditDay'
+import wretch from 'wretch'
 
 const Day = ({
   id,
@@ -9,6 +10,8 @@ const Day = ({
   currentPlan,
   editing,
   setEditing,
+  setPlans,
+  plans,
 }) => {
   const firstDay = date === '1' ? { gridColumnStart: startingDay + 1 } : null
   const current = currentDay.toString() === date ? 'today' : null
@@ -18,17 +21,20 @@ const Day = ({
   }
 
   const baseUrl = 'http://localhost:3001'
-  const [plan, setPlan] = useState(currentPlan)
 
   const updatePlan = async (planId, plan) => {
-    setEditing(false)
-    fetch(`${baseUrl}/plans/${planId}`, {
-      method: 'post',
-      body: JSON.stringify(plan),
-    }).then(response => {
-      console.log(response)
-      setPlan(response.result)
-    })
+    setEditing(-1)
+    wretch(`${baseUrl}/plans/`)
+      .json({
+        text: plan,
+        id: Number(planId),
+        month: Number(planId.slice(0, 4)),
+        day: Number(planId.slice(-2)),
+      })
+      .post()
+      .json(response => {
+        setPlans({ ...plans, date: response.result })
+      })
   }
 
   return (
@@ -39,6 +45,8 @@ const Day = ({
             id={id}
             plan={currentPlan ? currentPlan.text : ''}
             updatePlan={updatePlan}
+            editing={editing}
+            setEditing={setEditing}
           />
         </div>
       ) : (
