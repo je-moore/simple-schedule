@@ -83,3 +83,17 @@ span.next-month {
   font-weight: bold;
   line-height: 1rem;
 }
+
+/* EditDay */
+
+.edit-day {
+  position: absolute;
+  overflow: visible;
+  width: auto;
+  height: auto;
+}
+
+.edit-day textarea {
+  background-color: lightPink;
+  width: 300px;
+}

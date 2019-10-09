@@ -6,40 +6,45 @@ import startOfMonth from 'date-fns/startOfMonth'
 import getDaysInMonth from 'date-fns/getDaysInMonth'
 import getDay from 'date-fns/getDay'
 import addMonths from 'date-fns/addMonths'
+import isSameMonth from 'date-fns/isSameMonth'
 import format from 'date-fns/format'
 
 const MonthContainer = () => {
-  const initMonth = (monthOffset = 0) => {
-    const today = new Date()
-    const firstDateOfMonth = addMonths(startOfMonth(today), monthOffset)
-    const startingDay = getDay(firstDateOfMonth)
-    const daysInMonth = getDaysInMonth(firstDateOfMonth)
-    const currentDay = monthOffset === 0 ? getDate(today) : ''
-    const monthName = format(firstDateOfMonth, 'MMMM')
-    const monthNumber = format(firstDateOfMonth, 'yyMM')
+  const today = new Date()
+
+  const referenceDate = (monthOffset = 0) => {
+    return addMonths(startOfMonth(today), monthOffset)
+  }
+
+  const initMonth = referenceDate => {
+    const startingDay = getDay(referenceDate)
+    const daysInMonth = getDaysInMonth(referenceDate)
+    const currentDay = isSameMonth(today, referenceDate) ? getDate(today) : 0
+    const monthName = format(referenceDate, 'MMMM')
+    const monthId = format(referenceDate, 'yyMM')
     return {
-      monthOffset,
       currentDay,
       startingDay,
       daysInMonth,
       monthName,
-      monthNumber,
+      monthId,
     }
   }
 
-  // structure of month
-  const initialMonth = initMonth()
-  const [month, setMonth] = useState(initialMonth)
+  const [month, setMonth] = useState(initMonth(referenceDate()))
+  const [monthIndex, setMonthIndex] = useState(0)
+
   const shiftMonth = increment => {
-    setMonth(initMonth(month.monthOffset + increment))
+    setMonthIndex(monthIndex => monthIndex + increment)
   }
 
   // plans for each day of the month
   const baseUrl = 'http://localhost:3001'
   const [hasError, setErrors] = useState(false)
+  // const initialPlans = fetchPlans(fetchPlans(initialMonth.monthId))
   const [plans, setPlans] = useState({})
-  async function fetchPlans(monthNumber) {
-    const res = await fetch(`${baseUrl}/plans/${monthNumber}`)
+  const fetchPlans = async monthId => {
+    const res = await fetch(`${baseUrl}/plans/${monthId}`)
     res
       .json()
       .then(res => {
@@ -55,14 +60,23 @@ const MonthContainer = () => {
 
   // render calendar when month changes
   useEffect(() => {
-    setMonth(month)
-    fetchPlans(month.monthNumber)
-  }, [month])
+    const newRefDate = referenceDate(monthIndex)
+    setMonth(initMonth(newRefDate))
+    fetchPlans(format(newRefDate, 'yyMM'))
+  }, [monthIndex])
+
+  // which date is currently being edited
+  const [editing, setEditing] = useState(-1)
 
   return (
     <div className="calendar-month">
       <MonthHeader monthName={month.monthName} shiftMonth={shiftMonth} />
-      <Month {...month} plans={plans} />
+      <Month
+        {...month}
+        plans={plans}
+        editing={editing}
+        setEditing={setEditing}
+      />
     </div>
   )
 }
