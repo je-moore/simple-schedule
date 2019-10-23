@@ -27,6 +27,7 @@ export const setMonth = monthOffset => dispatch => {
       monthId,
     },
   })
+  setPlans(monthId)
 }
 
 export const setPlans = monthId => dispatch => {

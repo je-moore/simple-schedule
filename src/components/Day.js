@@ -1,8 +1,6 @@
 import React from 'react'
 
-const Day = ({ id, date, startingDay, currentDay }) => {
-  const firstDay = date === '1' ? { gridColumnStart: startingDay + 1 } : null
-  const current = currentDay.toString() === date ? 'today' : null
+const Day = ({ firstDay, current, date }) => {
   return (
     <div className={['calendar-day', current].join(' ')} style={firstDay}>
       <span className="calendar-day-date">{date}</span>

@@ -10,9 +10,9 @@ const MonthContainer = () => {
 
   useEffect(() => {
     dispatch(setMonth(monthOffset))
-  }, [monthOffset])
+  }, [monthOffset, dispatch])
 
-  const state = useSelector(state => state.month)
+  const state = useSelector(state => state)
 
   return (
     <div className="calendar-month">
