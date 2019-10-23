@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useUpdatePlan } from '../hooks'
 
-const EditDay = ({ id, plan, updatePlan }) => {
+const EditDay = ({ id, plan, plans }) => {
   const [text, setText] = useState(plan)
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const EditDay = ({ id, plan, updatePlan }) => {
 
   const onSubmit = event => {
     event.preventDefault()
-    updatePlan(id, text)
+    plans = useUpdatePlan(id, text)
   }
 
   return (

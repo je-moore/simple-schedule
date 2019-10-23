@@ -1,18 +1,28 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const MonthHeader = props => {
-  const { monthName, shiftMonth } = props
+  const { monthOffset, setMonthOffset } = props
+  const month = useSelector(state => state.month)
 
   return (
-    <div className="month-header">
-      <h2 className="month-name">{monthName}</h2>
-      <span className="prev-month shift-month" onClick={() => shiftMonth(-1)}>
-        ◀&nbsp;
-      </span>
-      <span className="next-month shift-month" onClick={() => shiftMonth(1)}>
-        &nbsp;▶
-      </span>
-    </div>
+    month && (
+      <div className="month-header">
+        <h2 className="month-name">{month.monthName}</h2>
+        <span
+          className="prev-month shift-month"
+          onClick={() => setMonthOffset(monthOffset - 1)}
+        >
+          ◀&nbsp;
+        </span>
+        <span
+          className="next-month shift-month"
+          onClick={() => setMonthOffset(monthOffset + 1)}
+        >
+          &nbsp;▶
+        </span>
+      </div>
+    )
   )
 }
 
