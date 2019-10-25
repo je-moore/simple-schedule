@@ -11,10 +11,11 @@ const DayWrapper = ({ id, date, startingDay, currentDay, plan }) => {
     dispatch({ type: 'SET_EDITING', payload: parseInt(dayId.slice(-2)) })
   }
 
-  const firstDay = date === '1' ? { gridColumnStart: startingDay + 1 } : null
-  const current = currentDay.toString() === date ? 'today' : null
+  const firstDay =
+    date.toString() === '1' ? { gridColumnStart: startingDay + 1 } : null
+  const current = currentDay === date ? ' today' : null
   return editing === date ? (
-    <EditDay />
+    <EditDay firstDay={firstDay} plan={plan} />
   ) : (
     <Day
       firstDay={firstDay}

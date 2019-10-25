@@ -3,7 +3,7 @@ import React from 'react'
 const Day = ({ firstDay, current, date, id, editDay, plan }) => {
   return (
     <div
-      className={['calendar-day', current].join(' ')}
+      className={['calendar-day', current].join('')}
       style={firstDay}
       onClick={() => editDay(id)}
     >
