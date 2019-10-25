@@ -4,23 +4,23 @@ import Month from '../components/Month'
 import MonthHeader from '../components/MonthHeader'
 import { setMonth } from '../actions'
 
-const MonthContainer = () => {
+const MonthWrapper = () => {
   const [monthOffset, setMonthOffset] = useState(0)
   const dispatch = useDispatch()
+  const state = useSelector(state => state)
+  const month = useSelector(state => state.month)
 
   useEffect(() => {
     dispatch(setMonth(monthOffset))
   }, [monthOffset, dispatch])
 
-  const state = useSelector(state => state)
-
   return (
     <div className="calendar-month">
       <MonthHeader monthOffset={monthOffset} setMonthOffset={setMonthOffset} />
-      <Month />
+      <Month month={month} />
       <pre>{JSON.stringify(state, null, 2)}</pre>
     </div>
   )
 }
 
-export default MonthContainer
+export default MonthWrapper

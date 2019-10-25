@@ -1,5 +1,5 @@
 import React from 'react'
-import MonthContainer from './containers/MonthContainer'
+import MonthWrapper from './containers/MonthWrapper'
 import './App.css'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <h1>Simple Schedule</h1>
       </header>
-      <MonthContainer />
+      <MonthWrapper />
     </div>
   )
 }

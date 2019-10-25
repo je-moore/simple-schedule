@@ -1,12 +1,9 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import Day from './Day'
+import DayWrapper from '../containers/DayWrapper'
 
-const Month = () => {
-  const month = useSelector(state => state.month)
-
+const Month = ({ month }) => {
   return (
-    month && (
+    Object.keys(month).length > 0 && (
       <div>
         <div className="calendar-month-heading">
           <div>Sunday</div>
@@ -19,12 +16,13 @@ const Month = () => {
         </div>
         <div className="calendar-month-days">
           {Array.from(Array(month.daysInMonth), (value, index) => (
-            <Day
+            <DayWrapper
               key={month.monthName + (index + 1)}
               id={month.monthId + ('0' + (index + 1)).slice(-2)}
-              date={(index + 1).toString()}
+              date={index + 1}
               startingDay={month.startingDay}
               currentDay={month.currentDay}
+              plan={month.plans ? month.plans[index + 1] : null}
             />
           ))}
         </div>

@@ -15,6 +15,7 @@ export const setMonth = monthOffset => dispatch => {
   const currentDay = isSameMonth(today, referenceDate) ? getDate(today) : 0
   const monthName = format(referenceDate, 'MMMM')
   const monthId = format(referenceDate, 'yyMM')
+  setPlans(monthId)
   dispatch({
     type: 'SET_MONTH',
     payload: {
@@ -27,17 +28,16 @@ export const setMonth = monthOffset => dispatch => {
       monthId,
     },
   })
-  setPlans(monthId)
+  dispatch(setPlans(monthId))
 }
 
 export const setPlans = monthId => dispatch => {
   axios
     .get(`${baseUrl}/plans/${monthId}`)
     .then(response => {
-      console.log(response)
       dispatch({
         type: 'SET_PLANS',
-        payload: response.body,
+        payload: response.data.result,
       })
     })
     .catch(error => console.log(error))

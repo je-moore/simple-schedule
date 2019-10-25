@@ -5,6 +5,5 @@ import editing from './editing'
 
 export default combineReducers({
   month,
-  plans,
   editing,
 })
