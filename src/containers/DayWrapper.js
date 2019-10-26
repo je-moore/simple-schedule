@@ -15,7 +15,7 @@ const DayWrapper = ({ id, date, startingDay, currentDay, plan }) => {
     date.toString() === '1' ? { gridColumnStart: startingDay + 1 } : null
   const current = currentDay === date ? ' today' : null
   return editing === date ? (
-    <EditDay firstDay={firstDay} plan={plan} />
+    <EditDay firstDay={firstDay} plan={plan} dayId={id} />
   ) : (
     <Day
       firstDay={firstDay}

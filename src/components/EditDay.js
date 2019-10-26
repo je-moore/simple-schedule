@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
+import { updatePlans } from '../actions'
 
-const EditDay = ({ firstDay, plan }) => {
+const EditDay = ({ dayId, firstDay, plan }) => {
   const [text, setText] = useState(plan)
 
   useEffect(() => {
@@ -17,9 +19,10 @@ const EditDay = ({ firstDay, plan }) => {
     setText(event.target.value)
   }
 
+  const dispatch = useDispatch()
   const onSubmit = event => {
     event.preventDefault()
-    // updatePlan(id, text)
+    dispatch(updatePlans(dayId, text))
   }
 
   return (
@@ -31,9 +34,8 @@ const EditDay = ({ firstDay, plan }) => {
           cols="50"
           onChange={handleInputChange}
           ref={txt}
-        >
-          {plan}
-        </textarea>
+          defaultValue={text}
+        ></textarea>
         <button>Exit</button>
       </form>
     </div>

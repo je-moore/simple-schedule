@@ -33,7 +33,9 @@ export const setMonth = monthOffset => dispatch => {
 
 export const setPlans = monthId => dispatch => {
   axios
-    .get(`${baseUrl}/plans/${monthId}`)
+    .get(`${baseUrl}/plans/${monthId}`, {
+      crossDomain: true,
+    })
     .then(response => {
       dispatch({
         type: 'SET_PLANS',
@@ -44,4 +46,26 @@ export const setPlans = monthId => dispatch => {
     .finally(function() {
       // always executed
     })
+}
+
+export const updatePlans = (id, text) => dispatch => {
+  const monthId = Number(id.slice(0, 4))
+  const day = Number(id.slice(-2))
+  dispatch(setPlans(monthId))
+  const data = JSON.stringify({
+    id: id,
+    text: text,
+    month: monthId,
+    day: day,
+  })
+  dispatch({ type: 'SET_EDITING', payload: -1 })
+  axios
+    .post(`${baseUrl}/plans`, data, {
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .then(response => {
+      dispatch(setPlans(monthId))
+      return response
+    })
+    .catch(error => console.log(error))
 }
