@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { updatePlans } from '../actions'
 
-const EditDay = ({ dayId, firstDay, plan }) => {
+const EditDay = ({ dayId, firstDay, plan, date }) => {
   const [text, setText] = useState(plan)
 
   useEffect(() => {
@@ -26,18 +26,19 @@ const EditDay = ({ dayId, firstDay, plan }) => {
   }
 
   return (
-    <div style={firstDay}>
-      <form onSubmit={onSubmit} className="edit-day">
-        <textarea
-          name="text"
-          rows="10"
-          cols="50"
-          onChange={handleInputChange}
-          ref={txt}
-          defaultValue={text}
-        ></textarea>
-        <button>Exit</button>
-      </form>
+    <div className="calendar-day" style={firstDay}>
+      <span className="calendar-day-date">{date}</span>
+      <div className="calendar-day-plan">
+        <form onSubmit={onSubmit} className="edit-day">
+          <textarea
+            name="text"
+            onChange={handleInputChange}
+            ref={txt}
+            defaultValue={text}
+          ></textarea>
+          <button>Save</button>
+        </form>
+      </div>
     </div>
   )
 }

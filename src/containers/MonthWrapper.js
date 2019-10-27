@@ -18,7 +18,6 @@ const MonthWrapper = () => {
     <div className="calendar-month">
       <MonthHeader monthOffset={monthOffset} setMonthOffset={setMonthOffset} />
       <Month month={month} />
-      <pre>{JSON.stringify(state, null, 2)}</pre>
     </div>
   )
 }

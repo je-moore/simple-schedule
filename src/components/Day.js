@@ -8,7 +8,7 @@ const Day = ({ firstDay, current, date, id, editDay, plan }) => {
       onClick={() => editDay(id)}
     >
       <span className="calendar-day-date">{date}</span>
-      <div className="calendar-day-plan">{plan}</div>
+      <pre className="calendar-day-plan">{plan}</pre>
     </div>
   )
 }

@@ -5,9 +5,6 @@ import './App.css'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Simple Schedule</h1>
-      </header>
       <MonthWrapper />
     </div>
   )

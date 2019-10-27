@@ -73,9 +73,9 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 pre {
-  font-family: monospace, monospace;
+  font-family: inherit;
   /* 1 */
-  font-size: 1em;
+  font-size: inherit;
   /* 2 */
 }
 
@@ -502,12 +502,9 @@ pre {
   border: 0;
   border-radius: 4px;
   background: transparent;
-  padding: 1rem;
   tab-size: 2;
   color: #404040;
-  font-family: Menlo, monospace;
-  font-size: 14px;
-  margin: 0 0 1.5rem 0;
+  margin: 0;
 }
 pre code {
   font-family: Menlo, monospace;
